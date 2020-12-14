@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Arduino Website</title>
+	<meta charset="utf-8">
+	<style>
+		.navigation
+		{
+			display: flex;
+			flex-direction: row;
+			justify-content: space-around;
+			background-color: #178C99;
+			color : white;
+		}
+		.navigation a 
+	{
+		text-decoration : none ;
+		display : block ;
+		padding : 1em;
+		color : white;
+	}
+	#gridWrapper
+	{
+			display: grid;
+			background-color: #D4E9EB ;
+			color : black;
+			grid-template-columns: 1fr 1fr;
+			grid-template-rows: 100px 100px;
+			grid-gap: 100px;
+			grid-gap-left:100px;
+
+			
+	}
+	img
+	{
+	max-width: 70%;
+	height: auto;
+	}
+
+	#gridWrapper > #unotxt,#nanotxt,#leonardotxt
+	{
+		font-size: 18px;
+		text-align: left;
+		vertical-align: middle;
+	}
+
+	</style>
+</head>
+
+<body>
+	<div>
+		<ul class = "navigation">
+			<li><a href = "#">Arduino.cc</a></li>
+			<li><a href="#">Profesional</a></li>
+			<li><a href="#">Education</a></li>
+			<li><a href="#">Store</a></li>
+		</ul>
+	</div>
+
+	<h3> Arduino Store </h3>
+	<hr>
+	<div id = "gridWrapper">
+		<div id = "pictUno"><img src="arduino/arduinouno.jpg" ></div>
+		<div id = "unotxt">
+		ARDUINO UNO REV3
+		Code: A000066
+		Barcode: 7630049200050
+		</div>
+		<div id = "pictNano"><img src="arduino/arduinonano.jpg"></div>
+		<div id = "nanotxt">
+		ARDUINO NANO
+		Code: A000005
+		Barcode: 7630049200173
+		</div>
+		<div id = "pictLeonardo"><img src="arduino/arduinoleonardo.jpg"></div>
+		<div id = "leonardotxt">
+		ARDUINO LEONARDO WITH HEADERS
+		Code: A000057
+		Barcode: 8058333491141
+		</div>
+	</div>
+
+</body>
+</html>
