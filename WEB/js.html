@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>JavaScript</title>
+</head>
+<body>
+	<h1>Javascript </h1>
+	<hr>
+	<form>
+		<input id ="data" type ="text" name="id">
+		<input type="button" value="click me" onclick="hello();">
+	</form>
+		<hr>
+		<button>Color</button>
+	<script>
+		function hello()
+		{
+			//入力した文字データをもらう
+			const msg = document.getElementById("data").value;
+
+			//もらったらデータを表示する
+			alert(msg);
+		}
+		//ボタンを探す
+		const btn = document.querySelector("button");
+		btn.onclick = function()
+		{
+		document.body.style.backgroundColor = "#ff0013";
+		}
+
+		//ランダム関数をつくる;いろいろな色をつくる
+		/*function random(number)
+		{
+			return Math.floor(Math.random() * (number+1));
+		}
+
+		btn.onclick = function()
+		{
+			const rndCol = "rgb(" + random(255) + "," + random(255) + "," + random(255) + ")";
+			document.body.style.backgroundColor = rndCol;
+		}
+	</script>
+</body>
+</html>
