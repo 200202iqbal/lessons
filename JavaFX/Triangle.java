@@ -23,11 +23,6 @@ public class Triangle extends Application
         //Group, scene
         //Group root = new Group();
         Scene scene = new Scene(v,500,500, Color.web("#111111"));
-
-        
-        
-        
-        
         stage.setScene(scene);
 
         stage.setTitle("Triangle");

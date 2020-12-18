@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Group;
+import javafx.scene.shape.Circle;
 
 import javafx.stage.StageStyle;
 
@@ -35,8 +36,10 @@ public class Moving extends Application
         public View()
         {
             //形をつくる,色をつける
-            Rectangle rect = new Rectangle(0,0,50,70);
+            Rectangle rect = new Rectangle(0,0,50,50);
+            Circle circ = new Circle(200,150,10);
             rect.setFill(Color.web("#ffaa00"));
+            circ.setFill(Color.web("#ffbb00"));
             //アニメーションをつくる；時間どれを動かすか
             TranslateTransition animation = new TranslateTransition(Duration.seconds(2),rect);
             //アニメーションについて；最初の状態
@@ -53,7 +56,7 @@ public class Moving extends Application
             //play, add
             
             animation.play();
-            getChildren().add(rect);
+            getChildren().addAll(rect,circ);
         
         }    
     }
