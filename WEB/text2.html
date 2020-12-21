@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> jquery : text</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1>このクラスの担任は誰ですか?</h1>
+        <button id = "tanaka"> 田中先生</button>
+        <button id = "yoshino"> 吉野先生</button>
+        <button id = "yamamoto"> 山本先生</button>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(function(){
+                $('#tanaka').on('click',function(){
+                    $('h1').text('正解');
+                    alert('正解');
+                });
+                $('#yoshino').on('click',function(){
+                    alert("違います");
+                    window.close();
+                });
+                $('#yamamoto').on('click',function(){
+                    alert("違います");
+                    window.close();
+                });
+            })
+        </script>
+    </body>
+</html>
