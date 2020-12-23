@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Simple Function</title>
+        <meta charset = "utf-8">
+    </head>
+    <body>
+        <p>When you click "Try it", a function will be called.</p>
+        <p>The function will display a message</p>
+        <button onclick = "myFunction()"> Try it</button>
+
+        <p id ="demo"> demo </p>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+        <script>
+            function myFunction(){
+                document.getElemenById("demo").innerHTML = "Hello";}
+        </script>
+    </body>
+</html>
