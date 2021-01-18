@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Naruto</title>
+	<meta charset="utf-8">
+	<style>
+		p{ color:orange; }
+		h1{color:maroon;
+		   font-family: Helveltica;}
+	</style>
+</head>
+<body>
+
+	<h1>Naruto</h1>
+	2021年1月18日月曜日
+	<hr>
+	<h2>登場人物</h2>
+	<ol>
+	<li id = "naruto">ナルト</li>
+	<li id = "sasuke">サスケ</li>
+	<li id = "kakashi">カカシ</li>
+	<li id = "sakura">サクラ</li>
+	</ol>
+
+	<ul>
+	<li id = "naruto2">ナルト</li>
+	<li id = "sasuke2">サスケ</li>
+	<li id = "kakashi2">カカシ</li>
+	<li id = "sakura2">サクラ</li>
+	</ul>
+
+	<p>
+		Narutoは週刊少年ジャンプに連載されていた忍者の物語。しかしナルトがいつ中忍試験に合格したか、わからない。
+	</p>
+	<p>
+		また、いつの間に子供がいて、やっぱり忍者になっていく？<br>
+		その物語は読まなかったので、私は知りません。。。
+	</p>
+
+	<h2>入力フォーム</h2>
+	<hr>
+	<form>
+		ID : 	<input type="text" name="id"><br>
+		Password :<input type="password" name="password"><br>
+		Date : <input type="date" name="date">
+		<input type="submit" value = "OK" name="Click">
+		<button>Enter</button>
+	</form>
+
+	<img src="github.png" width="300px" height="" align="right">
+	<hr>
+	<h1>質問</h1>
+	<hr>
+	<p id= "mondai">ナルトはどこに住んでいますか。</p>
+
+
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(function(){
+			$("h1").on("click",function(){
+				$("h1").css("color","blue");
+			});
+
+			$("h2").on("click",function(){
+				$("h2").css("color","red");
+			});
+
+			$("ol").on("click",function(){
+				$("ol").css("color","green");
+			});
+
+			$("#naruto").on("click", function(){
+				$("#naruto").css("color","#F8373D");
+			});
+
+			$("#sasuke").on("click", function(){
+				$("#sasuke").css("color", "#7337F8");
+			});
+			$("#kakashi").on("click",function(){
+				$("#kakashi").css("color","#8CDADB");
+			});
+
+			$("#sakura").on("click",function(){
+				$("#sakura").css("color","pink");
+			});
+
+			$("#naruto2").on("click",function(){
+				$("#naruto2").css("color","#F0A405");
+			});
+			$("#sasuke2").on("click",function(){
+				$("#sasuke2").css("color","#FCF149");
+			});
+			$("#kakashi2").on("click",function(){
+				$("#kakashi2").css("color","#D5DB50");
+			});
+			$("#sakura2").on("click",function(){
+				$("#sakura2").css("color","#BF9FDB");
+			});
+
+			$("#mondai").on("click",function(){
+				$("#mondai").text("東京?");
+			});
+		})
+	</script>
+</body>
+</html>
