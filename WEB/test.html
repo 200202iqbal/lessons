@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>クイズ</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<h1>クイズ with jQuery</h1>
+	問題文をクリックすると、正解が表示されます
+
+	<hr>
+
+	<p id="mondai1">インドネシアの首都は何ですか</p>
+	<p id="mondai2">インドネシアの使う語は何ですか</p>
+	
+
+	<script src = "https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		//JQueryのプログラム
+		$(function(){
+			//問題文(<p>)をクリックしたら、テキストを書き換える
+			$("#mondai1").on("click",function(){
+				$("#mondai1").text("ジャカルタです。");
+			});
+			$("#mondai2").on("click",function(){
+				$("#mondai2").text("インドネシア語です。");
+			});
+			
+		})
+	</script>
+</body>
+</html>

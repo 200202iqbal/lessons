@@ -62,7 +62,7 @@ class BreakoutThread extends AnimationTimer
 	public void handle(long time)
 	{
 		//画面表示をする、全部消す(全部白になる)
-		//gc.clearRect(0,0,640,480);
+		gc.clearRect(0,0,640,480);
 		gc.setFill(Color.BLACK);
 		gc.fillOval(ball_x - 5, ball_y - 5, 10 ,10);
 
