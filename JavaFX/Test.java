@@ -1,62 +1,70 @@
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.Group;
+import javafx.scene.layout.Pane;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.animation.Animation;
-import javafx.animation.TranslateTransition;
-import javafx.util.Duration;
+import javafx.animation.AnimationTimer;
 
 public class Test extends Application
 {
-    public static void main (String[] args)
+    //data
+    private BreakoutThread breaktoutthread;
+
+    //method
+    public static void main(String[] args)
     {
         launch(args);
     }
 
     @Override
-public void start(Stage stage) throws Exception
-{
-    View v = new View();
-    Scene scene = new Scene( v ,500,400);
-    stage.setScene(scene);
-    stage.setTitle("ブレックファースト");
-    stage.show();
-}
-}
-
-class View extends Group
-{
-    public View()
+    public void start(Stage stage)
     {
-        //shape
-        Circle circle = new Circle(50,50,30);
-        circle.setFill(Color.BLUE);
-        Circle circle_suihei = new Circle(50,50,30);
-        circle_suihei.setFill(Color.RED);
+        stage.setTitle("Aloha");
+        //pane,scene
 
-        //animation,duration
-        TranslateTransition animation = new TranslateTransition(Duration.seconds(2), circle);
-        TranslateTransition animation2 = new TranslateTransition(Duration.seconds(2), circle_suihei);
-        //animation-from to
-        animation.setFromX(200);
-        animation.setFromY(300);
-        animation.setToX(200);
-        animation.setToY(10);
+        Pane pane = new Pane();
+        Scene scene = new Scene(pane);
+        stage.setScene(scene);
 
-        animation2.setFromX(0);
-        animation2.setFromY(200);
-        animation2.setToX(400);
-        animation2.setToY(200);
-        //repeat
-        animation.setCycleCount(Animation.INDEFINITE);
-        animation2.setCycleCount(Animation.INDEFINITE);
+        //canvas
+        Canvas canvas = new Canvas(640,480);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        pane.getChildren().add(canvas);
 
-        //play,add
-        animation.play();
-        animation2.play();
-        getChildren().add(circle);
-        getChildren().add(circle_suihei);
+        //breakoutthread(animationtimer)
+       BreakoutThread  breakoutthread  = new BreakoutThread(gc);
+        breakoutthread.start();
+        stage.show();
+    }
+
+}
+
+class BreakoutThread extends AnimationTimer
+{
+    //data
+    private GraphicsContext gc;
+    private int count;
+
+    //method
+    public BreakoutThread (GraphicsContext gc)
+    {
+        this.gc = gc;
+        this.count = 0;
+    }
+
+    @Override
+    public void handle(long time)
+    {
+        //clear
+
+        gc.clearRect(0,0,640,480);
+
+        //draw
+        gc.setStroke(Color.BLACK);
+        gc.fillText("Aloha", 200,200);
+        gc.fillText("count: "+this.count,450,450);
+        gc.fillText("time: "+time,450,470);
     }
 }

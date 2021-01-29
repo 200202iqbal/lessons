@@ -2,38 +2,46 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.animation.AnimationTimer;
-import javafx.scene.paint.Color;
+import javafx.scene.input.KeyEvent;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyCode;
 
 public class BreakoutMain extends Application
 {
 	//data
 	private BreakoutThread breakoutthread;
 
-	public static void main (String[] args)
+	//method
+	public static void main(String[] args)
 	{
 		launch(args);
 	}
-	@Override
-	public void start (Stage stage)
-	{
-		stage.setTitle("ブロック崩し");
 
-		//pane,scene,setScene()
+	@Override
+	public void start(Stage stage)
+	{
+		//title
+		stage.setTitle("Breakout");
+
+		//pane,scene
 		Pane pane = new Pane();
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
 
-		//Canvas, GraphicsContext, add()
-		Canvas canvas = new Canvas(640,480);
+		//canvas
+		Canvas canvas = new Canvas (640,480);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		pane.getChildren().add(canvas);
 
-		//thread;スレッドっを実行する
+		//animationtimer(breakoutthread)
 		breakoutthread = new BreakoutThread(gc);
 		breakoutthread.start();
+
+		//show
 		stage.show();
 	}
 }
@@ -42,39 +50,124 @@ class BreakoutThread extends AnimationTimer
 {
 	//data
 	private GraphicsContext gc;
-	private int ball_x;		//ボールの場所;x
-	private int ball_y;		//ボールの場所;y
-	private int x_speed;	//ボールの速さ;x方向
-	private int y_speed;	//ボールの速さ;y方向
+	private Ball ball;
+	private Bar bar;
+	private Key key;
 
 	//method 
-	//constructor;コンストラクタ;newの時,１回だけ実行させる
-	BreakoutThread(GraphicsContext gc)
+	public BreakoutThread (GraphicsContext gc)
 	{
 		this.gc = gc;
-		ball_x  = 0;
-		ball_y = 0;
-		x_speed = 1;
-		y_speed = 1;
+		ball = new Ball();
+		this.bar = new Bar();
+		this.key = new Key();
 	}
 
-	@Override 
+	@Override
 	public void handle(long time)
 	{
-		//画面表示をする、全部消す(全部白になる)
+		//clear
 		gc.clearRect(0,0,640,480);
+
+		//draw; ball を表示;radius,x,y
+		ball.draw(gc);
+		ball.move();
+
+		bar.draw(gc);
+	}
+}
+
+class Ball
+{
+	//data
+	private int x;
+	private int y;
+	private int x_speed;
+	private int y_speed;
+	private int size;
+
+	//method
+	public Ball()
+	{
+		this.x = 0;
+		this.y = 0;
+		this.x_speed = 3;
+		this.y_speed = 3;
+		this.size = 20;
+	}
+	//ballを表示する
+	public void draw ( GraphicsContext gc) 
+	{
 		gc.setFill(Color.BLACK);
-		gc.fillOval(ball_x - 5, ball_y - 5, 10 ,10);
+		gc.fillOval(x,y,size,size);
+	}
+	//ballを移動させる
+	public void move ()
+	{
+		x += x_speed;
+		y += y_speed;
+		if (x > (640 -size))
+		{
+			x_speed *= -1;
+		}
+		if (y > (480-size))
+		{
+			y_speed *= -1;
+		}
+		if(x < 0)
+		{
+			x_speed *= -1;
+		}
+		if(y < 0)
+		{
+			y_speed *= -1;
+		}
+	}
+}
 
-		//ボールを移動させる
-		ball_x += x_speed;
-		ball_y += y_speed;
+class Bar
+{
+	//data
+	private int x;
+	private int y;
+	private int w;
+	private int h;
+	private int x_speed;
+	private int y_speed;
 
-		/*//文字を表示する
-		gc.fillText("count = " + count, 450,450);
-		gc.fillText("time = " + time, 450,500);
+	//method
+	public Bar()
+	{
+		this.x = 50;
+		this.y = 450;
+		this.w = 100;
+		this.h = 20;
+	}
 
-		//回数をカウントする；表示する回数
-		count++; */
+	public void draw(GraphicsContext gc)
+	{
+		gc.setFill(Color.BLUE);
+		gc.fillRect(x,y,w,h);
+
+	}
+}
+
+class Key
+{
+	//data
+	private boolean right;
+
+	//method
+	public Key()
+	{
+		this.right = false;
+	}
+
+	public void keyPressed (KeyEvent e)
+	{
+		if(e.getCode() == KeyCode.RIGHT)
+		{
+			System.out.println("Tekan Tombol Kanan");	
+		}
 	}
 }
