@@ -60,10 +60,12 @@ class BreakoutThread extends AnimationTimer{
 	private GraphicsContext gc;
 	private Ball ball;
 	private Bar bar;
+	private Key e;
 
 	//method
 	public BreakoutThread(GraphicsContext gc){
 		this.gc = gc;
+
 		ball = new Ball();
 		bar = new Bar();
 	}
@@ -78,6 +80,7 @@ class BreakoutThread extends AnimationTimer{
 		ball.draw(gc);
 		ball.move();
 		bar.draw(gc);
+		bar.move(key);
 	}
 }
 
@@ -111,6 +114,7 @@ class Ball{
 class Key
 {
 	//data
+
 	//method
 	public void keyPressed(KeyEvent e){
 		switch (e.getCode())
@@ -131,7 +135,9 @@ class Bar
 	private int x ;
 	private int y ;
 	private int width;
-	private int  height;
+	private int height;
+	private int x_left;
+	private int x_right;
 
 	public Bar()
 	{
@@ -139,11 +145,28 @@ class Bar
 		this.y = 450;
 		this.width = 70;
 		this.height = 25;
+		this.x_left = 3;
+		this.x_right = 3;
 	}
 
 	public void draw(GraphicsContext gc)
 	{
 		gc.setFill(Color.RED);
 		gc.fillRect(x,y,width,height);
+	}
+
+	public void move(KeyEvent e)
+	{
+		switch(e.getCode())
+		{
+			case LEFT:
+			this.x += this.x_left;
+			break;
+			case RIGHT:
+			this.x += this.x_right;
+			break;
+			default:
+			break;
+		}
 	}
 }
