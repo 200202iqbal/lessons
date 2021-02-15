@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> 練習_001 </title>
+	<meta charset="utf-8">
+</head>   
+<style>
+	li#maguro{
+		color:red;
+	}
+</style>
+<body>
+	<h1> 練習_001 </h1>
+	<hr>
+	<ul>
+		<li class = "sakana">ぶり</li>
+		<li class = "sakana">はまち</li>
+		<li class = "sakana">たい</li>
+		<li class = "sakana" id  = "maguro">まぐろ</li>
+		<li class = "sakana">こはだ</li>
+	</ul>
+
+	<hr>
+	<h1> 練習_002</h1>
+
+ 　	
+ 　 	
+ 　 	
+	<table border="1" style="width: 100%;font-size:15pt">
+		<tr id ="tr1">
+			<th>ぶり</th>
+			<th>鰤</th>
+		</tr>
+		<tr id ="tr2">
+			<th>はまち</th>
+			<th>魬</th>
+		</tr>
+		<tr id ="tr3">
+			<th> たい</th>
+			<th>鯛</th>
+		</tr>
+		<tr id ="tr4">
+			<th>まぐろ</th>
+			<th>鮪</th>
+		</tr>
+		<tr id ="tr5">
+			<th>こはだ</th>
+			<th>小鰭</th>
+		</tr>
+	</table>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+	<script>
+		$(function(){
+			var state = 0;
+			$("li").on("click",function(){
+				if(state == 0)
+				{
+					$(this).css("font-size","50pt");
+					state = 1;
+				}else
+				{
+					$("li").css("font-size","initial");
+					state = 0;
+				}
+			});
+			$("tr").on("click",function(){
+				if(state == 0)
+				{
+					$(this).css("color","blue");
+					state = 1;
+				}else
+				{
+					$("tr").css("color","black");
+					state = 0;
+				}
+				
+			});
+		})
+	</script>
+</body>
+</html>
