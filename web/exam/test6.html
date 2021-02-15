@@ -10,8 +10,8 @@
 	<hr>
 
 	<h2>ムハンマドイクバルタワカル」の画像</h2>
-	<img id ="img1" src="logo.png" width="300px" style="display: inline">
-	<img id="img2" src="java.jpg" width="300px"style="display: inline">
+	<img id ="img1" src="img/logo.png" width="300px" style="display: inline">
+	<img id="img2" src="img/java.jpg" width="300px"style="display: inline">
 	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 	</script>
@@ -19,16 +19,16 @@
 	<script>
 		$(function(){
 			var state = 0;
-			var gazo = ["logo.png","java.jpg"];
+			var gazo = ["img/logo.png","img/java.jpg"];
 			$("img").on("click",function(){
 				if(state == 0 )
 				{
-						$("#img1").attr("src","java.jpg");
-						$("#img2").attr("src","logo.png");
+						$("#img1").attr("src","img/java.jpg");
+						$("#img2").attr("src","img/logo.png");
 						state++;
 				}else{
-						$("#img1").attr("src","logo.png");
-						$("#img2").attr("src","java.jpg");
+						$("#img1").attr("src","img/logo.png");
+						$("#img2").attr("src","img/java.jpg");
 						state = 0;
 				}
 			});
