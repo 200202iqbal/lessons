@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> 練習 ・ 復習_008</title>
+</head>
+<body>
+
+	<h1> 練習 ・ 復習_008 </h1>
+	<hr>
+	<h2>ムハンマドイクバルタワカルムハンマドイクバルタワカルの画像</h2>
+	<img id ="img1" src = "logo.png" width="300px">
+
+
+	<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+	</script>
+
+	<script>
+		$(function(){
+			var state = 1;
+
+			var imgFile = [	"logo.png",
+							"java.jpg",
+							"html.png",
+							"python.png"];
+			$("img").on("click",function(){
+
+				if(state < imgFile.length)
+				{
+					$("#img1").attr("src",imgFile[state]);
+					state++;
+				}
+				else
+				{
+					$("#img1").attr("src",imgFile[0]);
+					state  = 1; //state
+					
+				}
+			});
+		})
+	</script>
+</body>
+</html>
