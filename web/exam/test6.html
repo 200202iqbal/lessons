@@ -21,12 +21,14 @@
 			var state = 0;
 			var gazo = ["logo.png","java.jpg"];
 			$("img").on("click",function(){
-				if(state <gazo.length )
+				if(state == 0 )
 				{
-						$("#img1").attr("src",gazo[state]);
+						$("#img1").attr("src","java.jpg");
+						$("#img2").attr("src","logo.png");
 						state++;
 				}else{
-						$("#img2").attr("src",gazo[state]);
+						$("#img1").attr("src","logo.png");
+						$("#img2").attr("src","java.jpg");
 						state = 0;
 				}
 			});
