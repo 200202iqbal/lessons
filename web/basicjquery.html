@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> jquery test </title>
+    <style>
+      .blue{
+        color:blue;
+      }
+      .red{
+        color:red;
+      }
+    </style>
+  </head>
+  <body>
+    <h1> test : jQuery </h1>
+    <hr>
+    <img src="github.png" widht="300">
+    <hr>
+    <ul>
+      <li>apple</li>
+      <li>banana</li>
+      <li>grape</li>
+      <li>strawberry</li>
+    </ul>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"> </script>
+    <script>
+      $(function(){
+        $("h1").on("click",function(){
+          $(this).addClass("blue");
+        });
+        $("img").on("click",function(){
+          $(this).attr("src","java.jpg");
+        });
+
+        let apple = 1;
+        const fruits  =["apple","banana","grape","strawberry"];
+
+        $("li").on("click",function(){
+          if (apple == 1 ){
+            $(this).text("Aloha").addClass("red");
+            apple = 0;
+          }else{
+            const num = $(this).index();
+            $(this).text(fruits[num]).removeClass("red");
+            apple = 1;
+          }
+        });
+        //menampilkan kordinat kursor ketika bergerak
+        $("body").on("mousemove",function(e){
+          $("h1").text(e.clientX);
+        });
+
+        $("img").on("click",function(e){
+          $("h1").text(e.clientX);
+        });
+      })
+    </script>
+  </body>
+</html>
