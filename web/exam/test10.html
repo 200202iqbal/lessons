@@ -10,12 +10,12 @@
 	<h2>ムハンマドイクバルタワカルムハンマドイクバルタワカルの画像</h2>
 	画像クリックしたら、次の画像を表示する
 	<br>
-	<img id ="img1" src = "logo.png" width="300px">
+	<img id ="img1" src = "img/logo.png" width="300px">
 	<h2 id="logo">私の画像 </h2>
 
-	
-	<button id="btnBack"><img src="back.png" width="50px"></button>
-	<button id="btnNext"><img src="next.png" width="50px"></button>
+
+	<button id="btnBack"><img src="img/back.png" width="50px"></button>
+	<button id="btnNext"><img src="img/next.png" width="50px"></button>
 
 	<script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
 	</script>
@@ -24,10 +24,10 @@
 		$(function(){
 			var state = 1;
 
-			var imgFile = [	"logo.png",
-							"java.jpg",
-							"html.png",
-							"python.png"];
+			var imgFile = [	"img/logo.png",
+							"img/java.jpg",
+							"img/html.png",
+							"img/python.png"];
 
 			var imgText = [	"私の画像",
 							"Java's Logo",
@@ -38,14 +38,14 @@
 
 				if(state < imgFile.length)
 				{
-					
+
 					$("#img1").attr("src",imgFile[state]);
 					$("#logo").text(imgText[state]);
 					state++;
 				}
 				else
 				{
-					
+
 					$("#img1").attr("src",imgFile[0]);
 					$("#logo").text(imgText[0]);
 					state = 1;
@@ -55,28 +55,28 @@
 
 				if(state < imgFile.length)
 				{
-					
+
 					$("#img1").attr("src",imgFile[state]);
 					$("#logo").text(imgText[state]);
 					state--;
 				}
 				else
 				{
-					
+
 					$("#img1").attr("src",imgFile[0]);
 					$("#logo").text(imgText[0]);
 					state = 1;
 				}
 				/*if(state < imgFile.length)
 				{
-					
+
 					$("#img1").attr("src",imgFile[state]);
 					$("#logo").text(imgText[state]);
 					state++;
 				}
 				else
 				{
-					
+
 					$("#img1").attr("src",imgFile[0]);
 					$("#logo").text(imgText[0]);
 					state = 1;

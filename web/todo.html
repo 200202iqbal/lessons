@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> todo list </title>
+  </head>
+  <body>
+
+    <h1>やることリスト (todo list)</h1>
+    <hr>
+    <input type = "text">
+    <button> 追加 </button>
+
+    <ul>
+    </ul>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      $(function(){
+        //ボタンをクリックしたら、書いたものを表示する
+        $("button").on("click",function(){
+          //入力欄(input)からデータをもらう
+          const item = $("input").val();
+
+          //リストに追加する
+          $("ul").append("<li>" + item + "</li>");
+
+            //入力欄を空にする
+          $("input").val("");
+        });
+
+        $("body").on("click","li",function(){
+          $(this).css("text-decoration","line-through");
+        });
+      })
+    </script>
+  </body>
+</html>
