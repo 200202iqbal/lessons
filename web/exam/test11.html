@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title> Test 12 </title>
+  </head>
+  <body>
+      <h1> Test 11 </h1>
+      ボタンを順番にクリックする
+      <hr>
+
+      <button id="btn1"> BTN1 </button>
+      <button id="btn2"> BTN2 </button>
+
+      <script src ="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+    	</script>
+
+      <script>
+    		$(function(){
+          var state = 0
+    			$("#btn1").on("click",function(){
+            if( state == 0 )
+            {
+              $("h1").css("color","red");
+              state = 1;
+            }
+
+    			});
+          $("#btn2").on("click",function(){
+            if( state == 1 )
+            {
+              $("h1").css("color","blue");
+              state = 2;
+            }else
+            {
+              $("h1").css("color","green");
+              state = 0;
+            }
+
+    			});
+    		})
+    	</script>
+  </body>
+</html>
