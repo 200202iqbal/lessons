@@ -13,7 +13,11 @@
 	<img id ="img1" src = "img/logo.png" width="300px">
 	<h2 id="logo">私の画像 </h2>
 
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> 9957f86d41e482b4721f5dc8d13686fe52e643cb
 	<button id="btnBack"><img src="img/back.png" width="50px"></button>
 	<button id="btnNext"><img src="img/next.png" width="50px"></button>
 
@@ -38,14 +42,14 @@
 
 				if(state < imgFile.length)
 				{
-					
+
 					$("#img1").attr("src",imgFile[state]);
 					$("#logo").text(imgText[state]);
 					state++;
 				}
 				else
 				{
-					
+
 					$("#img1").attr("src",imgFile[0]);
 					$("#logo").text(imgText[0]);
 					state = 1;
@@ -55,28 +59,34 @@
 
 				if(state < imgFile.length)
 				{
-					
+
 					$("#img1").attr("src",imgFile[state]);
 					$("#logo").text(imgText[state]);
 					state--;
 				}
 				else
 				{
+<<<<<<< HEAD
 					
 					$("#img1").attr("src",imgFile[3]);
 					$("#logo").text(imgText[3]);
+=======
+
+					$("#img1").attr("src",imgFile[0]);
+					$("#logo").text(imgText[0]);
+>>>>>>> 9957f86d41e482b4721f5dc8d13686fe52e643cb
 					state = 1;
 				}
 				/*if(state < imgFile.length)
 				{
-					
+
 					$("#img1").attr("src",imgFile[state]);
 					$("#logo").text(imgText[state]);
 					state++;
 				}
 				else
 				{
-					
+
 					$("#img1").attr("src",imgFile[0]);
 					$("#logo").text(imgText[0]);
 					state = 1;
