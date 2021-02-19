@@ -106,6 +106,14 @@ class Ball
 	{
 		this.x += x_speed;
 		this.y += y_speed;
+		if(this.x == 620)
+		{
+			this.x -= this.x_speed;
+		}
+		if(this.y == 460)
+		{
+			this.y -= this.y_speed; 
+		}
 	}
 
 	public void draw(GraphicsContext gc)
@@ -118,8 +126,14 @@ class Ball
 class Key
 {
 	//data
-	private boolean right = false;
+	private static boolean right;
+	private static boolean left;
 	//method
+	public Key()
+	{
+		this.right = right;
+		this.left = left;
+	}
 	public void keyPressed(KeyEvent e)
 	{
 		
@@ -127,6 +141,7 @@ class Key
 		{
 			case LEFT:
 			System.out.println(e.getCode() + " pressed");
+			left = true;
 			break;
 			case RIGHT:
 			System.out.println(e.getCode() + " pressed");
@@ -142,19 +157,23 @@ class Key
 		{
 			case LEFT:
 			System.out.println(e.getCode() + " released");
+			left = false;
 			break;
 			case RIGHT:
 			System.out.println(e.getCode() + " released");
 			right = false;
-
 			break;
 			default:
 		}
 	}
 
-	public boolean isRightPressed()
+	public static boolean isRightPressed()
 	{
 		return right;
+	}
+	public static boolean isLeftPressed()
+	{
+		return left;
 	}
 }
 
@@ -165,8 +184,6 @@ class Bar
 	private int width;
 	private int height;
 	private int x_speed;
-	private int y_speed;
-
 
 	public Bar()
 	{
@@ -175,15 +192,19 @@ class Bar
 		this.width = 80;
 		this.height = 20;
 		this.x_speed = 5;
-		this.y_speed = 5;
 	}
 
 	public void move(Key key)
 	{
+	
 		if(key.isRightPressed() == true)
 		{
-			//this.x += this.x_speed;
+			this.x += this.x_speed;
 			
+		}
+		if(key.isLeftPressed() == true)
+		{
+			this.x -= this.x_speed;
 		}
 
 	}

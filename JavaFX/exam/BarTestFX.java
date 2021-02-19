@@ -14,40 +14,42 @@ public class BarTestFX extends Application
 	//data
 	private BreakoutThread breakoutthread;
 
-	//method
 	public static void main(String[] args)
 	{
 		launch(args);
 	}
 
 	@Override
-	public void start (Stage stage)
+	public void start(Stage stage)
 	{
-		//Keyクラスをnewする
-		Key key = new Key();
-		//title
-		stage.setTitle("Ball Test");
+		stage.setTitle("Bar Test FX 2");
 
 		//pane,scene
 		Pane pane = new Pane();
 		Scene scene = new Scene(pane);
 		stage.setScene(scene);
 
-		//setOnKeyPressed(); キー操作の処理
+		Key key = new Key();
 		scene.setOnKeyPressed(
 			new EventHandler<KeyEvent>(){
 				public void handle(KeyEvent e){
 					key.keyPressed(e);
 				}
 			});
+		scene.setOnKeyReleased(
+			new EventHandler<KeyEvent>(){
+				public void handle(KeyEvent e){
+					key.keyReleased(e);
+				}
+			});
 
-		//canvas,gc 
+		//canvas,graphicscontext
 		Canvas canvas = new Canvas(640,480);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		pane.getChildren().add(canvas);
 
 		//breakoutthread
-		breakoutthread = new BreakoutThread(gc);
+		breakoutthread = new BreakoutThread(gc,key);
 		breakoutthread.start();
 
 		//show
@@ -55,118 +57,173 @@ public class BarTestFX extends Application
 	}
 }
 
-class BreakoutThread extends AnimationTimer{
+class BreakoutThread extends AnimationTimer
+{
 	//data
 	private GraphicsContext gc;
 	private Ball ball;
 	private Bar bar;
-	private Key e;
 
 	//method
-	public BreakoutThread(GraphicsContext gc){
+	public BreakoutThread(GraphicsContext gc,Key key)
+	{
 		this.gc = gc;
-
-		ball = new Ball();
-		bar = new Bar();
+		this.ball = new Ball();
+		this.bar = new Bar(key);
 	}
 
-	//↓表示する処理
 	@Override
 	public void handle(long time)
 	{
-		//1回、全部消す
 		gc.clearRect(0,0,640,480);
-		
-		ball.draw(gc);
+
 		ball.move();
+		bar.move();
+		ball.draw(gc);
 		bar.draw(gc);
-		bar.move(key);
 	}
 }
 
-class Ball{
+class Ball
+{
 	//data
 	private int x;
 	private int y;
 	private int x_speed;
 	private int y_speed;
 
-	//method
-	public Ball(){
+	public Ball()
+	{
 		this.x = 20;
 		this.y = 20;
 		this.x_speed = 5;
 		this.y_speed = 5;
 	}
 
-	public void draw(GraphicsContext gc){
+	public void move()
+	{
+		this.x += x_speed;
+		this.y += y_speed;
+		if(this.x == 620)
+		{
+			this.x -= this.x_speed;
+		}
+		if(this.y == 460)
+		{
+			this.y -= this.y_speed; 
+		}
+	}
+
+	public void draw(GraphicsContext gc)
+	{
 		gc.setFill(Color.BLUE);
 		gc.fillOval(x,y,20,20);
 	}
-
-	public void move(){
-		this.x += this.x_speed;
-		this.y += this.y_speed;
-	}
-
 }
 
 class Key
 {
 	//data
-
+	private boolean right;
+	private boolean left;
 	//method
-	public void keyPressed(KeyEvent e){
-		switch (e.getCode())
+	public Key()
+	{
+		this.right = false;
+		this.left = false;
+	}
+	public void keyPressed(KeyEvent e)
+	{
+		
+		switch(e.getCode())
 		{
-			case LEFT :
-			System.out.println("LEFT pressed");
+			case LEFT:
+			System.out.println(e.getCode() + " pressed");
+			left = true;
 			break;
-			case RIGHT :
-			System.out.println("RIGHT pressed");
+			case RIGHT:
+			System.out.println(e.getCode() + " pressed");
+			right = true;
 			break;
 			default:
-			break;
 		}
 	}
-}
-class Bar
-{
-	private int x ;
-	private int y ;
-	private int width;
-	private int height;
-	private int x_left;
-	private int x_right;
-
-	public Bar()
+	public void keyReleased(KeyEvent e)
 	{
-		this.x = 150;
-		this.y = 450;
-		this.width = 70;
-		this.height = 25;
-		this.x_left = 3;
-		this.x_right = 3;
+		
+		switch(e.getCode())
+		{
+			case LEFT:
+			System.out.println(e.getCode() + " released");
+			left = false;
+			break;
+			case RIGHT:
+			System.out.println(e.getCode() + " released");
+			right = false;
+			break;
+			default:
+		}
 	}
 
+	public boolean isRightPressed()
+	{
+		return right;
+	}
+	public boolean isLeftPressed()
+	{
+		return left;
+	}
+	public void setRightPressed(boolean right)
+	{
+		this.right = right; 
+	}
+}
+
+class Bar
+{
+	private int x;
+	private int y;
+	private int width;
+	private int height;
+	private int x_speed;
+	private Key key;
+
+	public Bar(Key key)
+	{
+		this.x = 300;
+		this.y = 450;
+		this.width = 80;
+		this.height = 20;
+		this.x_speed = 5;
+		this.key = key;
+	}
+
+	public void move()
+	{
+	
+		if(key.isRightPressed() == true)
+		{
+			this.x += this.x_speed;
+			if(this.x == 560)
+			{
+				this.x -= this.x_speed;
+			}
+		}
+
+
+		if(key.isLeftPressed() == true)
+		{
+			this.x -= this.x_speed;
+			if(this.x == 0)
+			{
+				this.x += this.x_speed;
+			}
+		}
+
+	}
 	public void draw(GraphicsContext gc)
 	{
 		gc.setFill(Color.RED);
 		gc.fillRect(x,y,width,height);
-	}
-
-	public void move(KeyEvent e)
-	{
-		switch(e.getCode())
-		{
-			case LEFT:
-			this.x += this.x_left;
-			break;
-			case RIGHT:
-			this.x += this.x_right;
-			break;
-			default:
-			break;
-		}
 	}
 }
