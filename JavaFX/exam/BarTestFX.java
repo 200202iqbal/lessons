@@ -22,7 +22,7 @@ public class BarTestFX extends Application
 	@Override
 	public void start(Stage stage)
 	{
-		stage.setTitle("Bar Test FX 2");
+		stage.setTitle("Bar Test FX");
 
 		//pane,scene
 		Pane pane = new Pane();
@@ -104,13 +104,16 @@ class Ball
 	{
 		this.x += x_speed;
 		this.y += y_speed;
-		if(this.x == 620)
+		System.out.println(this.x);
+		if(this.x > 610 || this.y > 450)
 		{
-			this.x -= this.x_speed;
+			x_speed *= -1;
+			y_speed *= -1;
 		}
-		if(this.y == 460)
+		if(this.x < 0 || this.y < 0)
 		{
-			this.y -= this.y_speed; 
+			x_speed *= -1;
+			y_speed *= -1;
 		}
 	}
 
@@ -134,7 +137,7 @@ class Key
 	}
 	public void keyPressed(KeyEvent e)
 	{
-		
+
 		switch(e.getCode())
 		{
 			case LEFT:
@@ -150,7 +153,7 @@ class Key
 	}
 	public void keyReleased(KeyEvent e)
 	{
-		
+
 		switch(e.getCode())
 		{
 			case LEFT:
@@ -175,7 +178,7 @@ class Key
 	}
 	public void setRightPressed(boolean right)
 	{
-		this.right = right; 
+		this.right = right;
 	}
 }
 
@@ -200,7 +203,7 @@ class Bar
 
 	public void move()
 	{
-	
+
 		if(key.isRightPressed() == true)
 		{
 			this.x += this.x_speed;
