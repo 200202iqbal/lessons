@@ -25,6 +25,15 @@ public class AnimatedImage
 
     Canvas canvas = new Canvas(512,512);
     root.getChildren().add(Canvas);
+    GraphicsContext gc = canvas.getGraphicsContext2D();
+
+    public Image[] frames;
+    public double duration;
+
+    public Image getFrame(double time)
+    {
+      int index = (int)()
+    }
     stage.show();
   }
 }
