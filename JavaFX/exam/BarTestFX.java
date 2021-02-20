@@ -43,13 +43,14 @@ public class BarTestFX extends Application
 				}
 			});
 
+			Bar bar = new Bar(key);
 		//canvas,graphicscontext
 		Canvas canvas = new Canvas(640,480);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		pane.getChildren().add(canvas);
 
 		//breakoutthread
-		breakoutthread = new BreakoutThread(gc,key);
+		breakoutthread = new BreakoutThread(gc,key,bar);
 		breakoutthread.start();
 
 		//show
@@ -65,10 +66,10 @@ class BreakoutThread extends AnimationTimer
 	private Bar bar;
 
 	//method
-	public BreakoutThread(GraphicsContext gc,Key key)
+	public BreakoutThread(GraphicsContext gc,Key key,Bar bar)
 	{
 		this.gc = gc;
-		this.ball = new Ball();
+		this.ball = new Ball(bar);
 		this.bar = new Bar(key);
 	}
 
@@ -79,6 +80,7 @@ class BreakoutThread extends AnimationTimer
 
 		ball.move();
 		bar.move();
+		ball.collision();
 		ball.draw(gc);
 		bar.draw(gc);
 	}
@@ -91,26 +93,37 @@ class Ball
 	private int y;
 	private int x_speed;
 	private int y_speed;
+	private Bar bar;
 
-	public Ball()
+	public Ball(Bar bar)
 	{
-		this.x = 20;
+		this.x = 100;
 		this.y = 20;
 		this.x_speed = 5;
 		this.y_speed = 5;
+		this.bar = bar;
 	}
 
 	public void move()
 	{
 		this.x += x_speed;
 		this.y += y_speed;
-		System.out.println(this.x);
-		if(this.x > 610 || this.y > 450)
+
+		if(this.x > 610 || this.y > 450  )
 		{
 			x_speed *= -1;
 			y_speed *= -1;
 		}
 		if(this.x < 0 || this.y < 0)
+		{
+			x_speed *= -1;
+			y_speed *= -1;
+		}
+	}
+
+	public void collision()
+	{
+		if(this.y == bar.getYcorrdinate() && this.y == bar.getBarArea())
 		{
 			x_speed *= -1;
 			y_speed *= -1;
@@ -190,6 +203,7 @@ class Bar
 	private int height;
 	private int x_speed;
 	private Key key;
+	private int area;
 
 	public Bar(Key key)
 	{
@@ -199,8 +213,20 @@ class Bar
 		this.height = 20;
 		this.x_speed = 5;
 		this.key = key;
+		this.area = this.x * this.y;
 	}
-
+	public int getXcoordinate()
+	{
+		return this.x;
+	}
+	public int getYcorrdinate()
+	{
+		return this.y;
+	}
+	public int getBarArea()
+	{
+		return this.area;
+	}
 	public void move()
 	{
 
