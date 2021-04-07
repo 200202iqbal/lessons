@@ -30,9 +30,34 @@ public class AnimatedImage
     public Image[] frames;
     public double duration;
 
+    AnimatedImage ufo = new AnimatedImage();
+    Image[] imageArray = new Image[4];
+    for(int i = 0; i < 4; i++)
+    {
+      imageArray[i] = new Image("/ship/f" + i + ".png");
+    }
+    ufo.frames = imageArray;
+    ufo.duration = 0.100;
+
+    final long startNanoTime = System.nanoTime();
+
+    new AnimationTimer()
+    {
+      public void handle(long currentNanoTime)
+      {
+        double t = (currentNanoTime - startNanoTime) / 1000000000.0;
+
+
+
+        //background image clars Canvas
+        gc.drawImage(ufo.getFrame(t),450,25);
+      }
+    }.start();
+
     public Image getFrame(double time)
     {
-      int index = (int)()
+      int index = (int)((time % (frames.length * duration)) / duration;
+      return frames[index];
     }
     stage.show();
   }
