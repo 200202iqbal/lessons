@@ -1,0 +1,20 @@
+Hero section : sebuah bagian / section yang pertama kali dilihat oleh user
+
+section di portofolio pribadi
+1. navbar section
+2. hero section isinya: nama,keterangan singkat mengenai pribadi
+3. about me / about us section
+4. project section
+5. contact us section
+6. footer section
+
+bootstrap :
+class: text-center > membuat tulisan ke tengah
+        text-end > membuat tulisan ke kanan
+        text-start > membuat tulisan ke kiri
+
+selalu cek documentaion bootstrap untuk melihat class2nya
+
+tips vscode : drag baris yg ingin dicopy, tekan alt+shift kemudian tekan bawah jika ingin mengopynya ke bawah, tekan atas jika ingin mengopynya ke atas
+
+maksimal ukuran column dalam bootstrap ada 12

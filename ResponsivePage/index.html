@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /*Simple dashboard grid CSS  */
+        /* Assign grid instructions to our parent grid container */
+        /* Make our dashboard responsive in a mobile-first format*/
+        .grid-container
+        {
+            display:grid;
+            grid-template-columns: 1fr; /*Side nav is hidden on mobile*/
+            grid-template-rows:50px 1fr 50px;
+            grid-template-areas:
+            "header"
+            "main"
+            "footer";
+            height:100vh;
+        }
+        /*Mobile-firs side nav styles*/
+        .sidenav
+        {
+            display:flex;
+            grid-area:sidenav;
+            flex-direction: column;
+            height:100%;
+            width:240px;
+            position:fixed;
+            overflow-y: auto;
+            box-shadow: 0 2px 2px p rgba(0,0,0,0.16),0 0 0 1px rgba(0,0,0,0.08);
+            /*needs to sit above the hamburger menu icon */
+            z-index:2;
+            transform:translateX(-245px);
+            transition:all .6s ease-in-out;
+            background-color:#0e0726;
+        }
+        /*The active class is toggled on hamburger and close icon clikcs*/
+        .sidenav.active
+        {
+            transform:translateX(0);
+        }
+        /*Only visible on mobile screens */
+        .sidenav__close-icon
+        {
+            position:absolute;
+            visibility: visible;
+            top:8px;
+            right:12px;
+            cursor:pointer;
+            font-size:20px;
+            color:#ddd;
+        }
+        .main-cards
+        {
+            column-count:1;
+            column-gap:20px;
+            margin:20px;
+        }
+        /*Hamburger menu icon, stays fixed on mobile for any possible scrolling*/
+        .menu-icon
+        {
+            position:fixed;
+            display:flex;
+            top:5px;
+            left:10px;
+            align-items:center;
+            justify-content:center;
+            border-radius:50%;
+            z-index:1;
+            cursor:pointer;
+            padding:12px;
+            background-color:#DADAE3;
+        }
+        /*Make room for the menu icon on mobile*/
+        .header__search
+        {
+            margin-left:42px;
+        }
+
+        /*Non-mobile styles, 750px breakpoint */
+        @media only screen and (min-width:46.875em)
+        {
+            /*show the sidenav*/
+            .grid-container
+            {
+                grid-template-columns:240px 1fr;/*Show the side nav for non-mobile screens*/
+                grid-template-areas:
+                "sidenav header"
+                "sidenav main"
+                "sidenav footer";
+            }
+            .sidenav
+            {
+                position: relative;
+                display:flex;
+                flex-direction:column;
+                transform:translateX(0);
+            }
+            .sidenav__close-icon
+            {
+                visibility: hidden;
+            }
+        }
+        @media only screen and (min-width:65.625em)
+        {
+            /*Break out main cards into two columns */
+            .main-cards
+            {
+                column-count:2;
+            }
+        }
+        /* .grid-container
+        {
+            display:grid;
+            grid-template-columns:240px 1fr;
+            grid-template-rows:50px 1fr 50px;
+            grid-template-areas:
+            "sidenav header"
+            "sidenav main"
+            "sidenav footer";
+            height:100vh;
+        } */
+
+        /* Give every child element its grid name */
+        .header
+        {
+            grid-area:header;
+            background-color: #ece9f9;
+        }
+        /*Will be hidden on mobile*/
+        /* .sidenav
+        {
+            display:flex; 
+            flex-direction: column;
+            grid-area:sidenav;
+            background-color:#0e0726;
+        }  */
+        .sidenav__list
+        {
+            padding:0;
+            margin-top:85px;
+            list-style-type:none;
+        }
+        .sidenav__list-item
+        {
+            padding:20px 20px 20px 40px;
+            color:#ddd;
+        }
+        .sidenav__list-item:hover
+        {
+            background-color: rgba(255,255,255,0.2);
+            cursor:pointer;
+        }
+        .main
+        {
+            grid-area:main;
+            background-color:#4525be;
+        }
+        .footer
+        {
+            grid-area:footer;
+            background-color: #ece9f9;
+        }
+        .header,.footer
+        {
+            display:flex;
+            align-items:center;
+            justify-content: space-between;
+            padding:0 16px;
+            background-color:#ece9f9;
+        }
+        .main-header
+        {
+            display:flex;
+            justify-content: space-between;
+            margin:20px;
+            padding:20px;
+            height:150px; /*Force our height since we dont't have actual content yet */
+            background-color:#4525be;
+            color:slategray;
+        }
+        .main-overview
+        {
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(265px,1fr)); /*Where the magic happens*/
+            grid-auto-rows:94px;
+            grid-gap:20px;
+            margin:20px;
+        }
+        .overviewcard
+        {
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:20px;
+            background-color: #d3d3;
+            color:#fff;
+        }
+        /* .main-cards
+        {
+            column-count:2;
+            column-gap:20px;
+            margin:20px;
+        } */
+        .card
+        {
+            display:flex;
+            flex-direction: column;
+            align-items:center;
+            width:100%;
+            background-color:#301a85;
+            margin-bottom:20px;
+            -webkit-column-break-inside: avoid;
+            padding:24px;
+            box-sizing: border-box;
+        }
+        /*Force varying heights to simulate dynamic content */
+        .card:first-child
+        {
+            height:485px;
+        }
+        .card:nth-child(2)
+        {
+            height:200px;
+        }
+        .card:nth-child(3)
+        {
+            height:265px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="menu-icon">
+            <i class="fas fa-bars"></i>
+        </div>
+        <header class="header">
+            <div class="header__search">Search...</div>
+            <div class="header__avatar">Your face</div>
+        </header>
+        <aside class="sidenav">
+            <div class="sidenav__close-icon">
+                <i class="fas fa-items"></i>
+            </div>
+            <ul class="sidenav__list">
+                <li class="sidenav__list-item">Item One</li>
+                <li class="sidenav__list-item">Item Two</li>
+                <li class="sidenav__list-item">Item Three</li>
+                <li class="sidenav__list-item">Item Four</li>
+                <li class="sidenav__list-item">Item Five</li>
+            </ul>
+        </aside>
+
+        <main class="main">
+            <div class="main-header">
+                <div class="main-header__heading">Hello User</div>
+                <div class="main-header__updates">Recent Items</div>
+            </div>
+            <div class="main-overview">
+                <div class="overviewcard">
+                    <div class="overview__icon">Overview</div>
+                    <div class="overviewcard__info">Card</div>
+                    </div>
+                <div class="overviewcard">
+                    <div class="overview__icon">Overview</div>
+                    <div class="overviewcard__info">Card</div>
+                </div>
+                <div class="overviewcard">
+                    <div class="overview__icon">Overview</div>
+                    <div class="overviewcard__info">Card</div>
+                </div>
+                <div class="overviewcard">
+                    <div class="overview__icon">Overview</div>
+                    <div class="overviewcard__info">Card</div>
+                </div>
+            </div>
+            <div class="main-cards">
+                <div class="card">Card 1</div>
+                <div class="card">Card 2</div>
+                <div class="card">Card 3</div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="footer__copyright">&copy; 2021 MIT</div>
+            <div class="footer__signature">Made with love by pure genius</div>
+        </footer>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        const menuIconEl = $(".menu-icon");
+        const sidenavEl = $(".sidenav");
+        const sidenavCloseEl = $(".sidenav__close-icon");
+
+        // Add and remove provided class names
+        function toggleClassName(el,className)
+        {
+            if(el.hasClass(className))
+            {
+                el.removeClass(className);
+            }else
+            {
+                el.addClass(className);
+            }
+        }
+
+        //Open the side nav on click
+        menuIconEl.on("click",function(){
+            toggleClassName(sidenavEl,"active");
+        });
+        //Close the side nav on click
+        sidenavCloseEl.on("click",function(){
+            toggleClassName(sidenavEl,"active");
+        });
+    </script>
+</body>
+</html>
